@@ -1,0 +1,63 @@
+{% extends 'rooms/base.html' %}
+
+{% block html_title %} - Join A Room{% endblock %}
+{% block meta_desc %}Join your room now! Gather with your friends and collaborate with RoomFiles.{% endblock %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    <div class="card mt-3">
+        <div class="card-body">
+
+            <form method="POST" id="roomJoinForm">
+                {% csrf_token %}
+                <div class="d-flex">
+                    <legend>Join a Room</legend>
+
+                    <button type="button" id="qrScannerToggle" class="btn btn-dark btn-sm float-right">
+                        <span class="material-icons">qr_code_scanner</span>
+                    </button>
+                </div>
+                
+
+                <fieldset class="form-group">
+                    {{ form | crispy }}
+                </fieldset>
+                
+                <div class="form-group text-right">
+                    <button class="btn btn-primary" type="submit" name="join">
+                        Join
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    
+
+    <div id="qrScannerModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Scan the room's QR code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="qr-scanner"></div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="{% static 'js/html5-qrcode.min.js' %}"></script>
+    
+
+</div>
+{% endblock content %}

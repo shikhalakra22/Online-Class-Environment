@@ -1,0 +1,76 @@
+{% extends 'rooms/base.html' %}
+
+{% block content %}
+
+<div class="container pt-3">
+
+    <!-- Search Bar -->
+    <form method="GET">
+        <div class="input-group">
+            <input type="search" placeholder="Search for announcement..." class="form-control" name="search" value="{{ search }}">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-dark btn-sm">
+                    <i class="material-icons">search</i>
+                </button>
+                
+                <a href="javascript:location.search=''" class="btn btn-dark btn-sm btn-search-cancel">
+                    <i class="material-icons">cancel</i>
+                </a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-sort">Sort By:</label>
+            <select name="sort" id="input-sort" class="form-control" onchange="this.form.submit()">
+                <option value="date-desc" {% if sort_with == "date-desc" %}selected{% endif %}>
+                    Newest first
+                </option>
+                <option value="date-asc" {% if sort_with == "date-asc" %}selected{% endif %}>
+                    Oldest first
+                </option>
+            </select>
+        </div>
+    </form>
+
+    {% if announcements %}
+
+        <!-- Infinite Container -->
+        <div class="infinite-container pt-3">
+            {% for ann in announcements %}
+            
+            {% include 'rooms/item_templates/announcement_item.html' %}
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Loading Modal -->
+        <div id="loadingModal" class="modal" tabindex="-1" role="dialog" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        Loading...
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if announcements.has_next %}
+            <a href="?page={{ announcements.next_page_number }}" class="infinite-more-link"></a>
+        {% else %}
+            <div class="infinite-item text-center my-5">No more announcements to show</div>
+        {% endif %}
+            
+    {% else %}
+    <div class="text-center">
+        Nothing more.
+    </div>
+    {% endif %}
+    
+
+</div>
+
+
+
+
+{% endblock content %}

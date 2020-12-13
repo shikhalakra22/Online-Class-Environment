@@ -1,0 +1,10 @@
+<div class="avatar-select-container">
+{% for a in p_form.avatars %}
+    <button type="button" class="avatar-item {% if p_form.instance.avatar.id == a.id %}avatar-item-selected{% endif %}"
+    value="{{ a.id }}">
+
+        <!-- Avatar image -->
+        <img src="{{request.scheme}}://{{request.get_host}}{{a.image_url}}" alt="{{a.name}}" class="avatar-thumbnail" loading="lazy">
+    </button>
+{% endfor %}
+</div>

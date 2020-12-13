@@ -1,0 +1,57 @@
+{% extends 'rooms/base.html' %}
+{% block html_title %} - Notifications{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<div class="container infinite-container">
+
+    <div class="text-right py-3">
+        <a href="{% url 'api-notif-read-all' %}" class="btn btn-secondary btn-sm btn-raised" id="readAllNotifications">Mark all as read</a>
+    </div>
+
+    {% for notif in notifications %}
+    <a href="{{ notif.action_obj.get_absolute_url }}" class="card infinite-item mb-3 {% if not notif.is_read %}card-unread{% endif %}">
+        <div class="card-body">
+
+            {% if notif.actor.profile.avatar %}
+                <img src="{{request.scheme}}://{{request.get_host}}{{ notif.actor.profile.avatar.image_url }}" alt="{{notif.actor.profile.avatar.name}}" class="avatar-thumbnail float-left">
+            {% else %}
+                <img src="{% static 'images/user-default.svg' %}" alt="Default Profile Icon" class="avatar-thumbnail float-left">
+            {% endif %}
+
+
+            <div class="content-with-avatar">
+                <div class="text-truncated">
+                    <strong>{{ notif.actor.profile.display_username }}</strong>
+                    
+                    {{ notif.verb }}
+
+                    <!-- a or an -->
+                    {% if notif.content_type.name|slice:':1' in 'aeiou' %} an {% else %} a {% endif %}
+
+                    {{ notif.content_type.name }}
+
+                    {{ notif.action_obj.notification_text }}
+
+                </div>
+
+                <span class="small d-block text-muted pt-2">
+                    {{ notif.executed_datetime|timesince }}
+                </span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+</div>
+
+{% if notifications.has_next %}
+    <a href="?page={{ notifications.next_page_number }}" class="infinite-more-link"></a>
+{% else %}
+    <div class="text-center infinite-item pt-2 pb-4">
+        No more notifications
+    </div>
+{% endif %}
+
+{% endblock content %}

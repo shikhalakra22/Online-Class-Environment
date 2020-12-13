@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% if not DEBUG %}
+    <!-- Google Analytics -->
+    {% include 'rooms/google_analytics.html' %}
+    {% endif %}
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Class Environment{% block html_title %}{% endblock %}</title>
+    <meta name="description" content="{% block meta_desc %}{% endblock %}">
+
+    <meta property="og:title" content="RoomFiles" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://roomfiles.herokuapp.com" />
+    <meta property="og:image" content="{% static 'images/link-preview-image.png' %}" />
+
+    {% include 'rooms/cdn_dependencies/bootstrapmd_css.html'%}
+    {% include 'rooms/cdn_dependencies/font_css.html'%}
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body>
+
+    {% include 'rooms/cdn_dependencies/jquery.html'%}
+    {% include 'rooms/cdn_dependencies/popper.html'%}
+
+    
+    <!-- #region - Navbar & Messages -->
+    <!-- Navbar -->
+    {% include 'rooms/navbar.html' %}
+
+    <!-- Global Messages -->
+    
+    <div id="messages" class="container pt-3">
+        {% if messages %}
+            {% for message in messages %}
+
+                {% if not message.tags == 'error' %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+
+        <noscript>
+            <div class="alert alert-danger fade show">
+                Please <strong>enable Javascript</strong> in your browser, or the site won't work properly.
+                <a href="https://www.whatismybrowser.com/guides/how-to-enable-javascript/auto" target="_blank">How to enable it?</a>
+            </div>
+        </noscript>
+        
+    </div>
+    
+
+    <!-- #endregion -->
+
+    
+    {% block content %}{% endblock %}
+
+    
+    {% include 'rooms/cdn_dependencies/snackbar.html'%}
+    {% include 'rooms/cdn_dependencies/bootstrapmd.html'%}
+    {% include 'rooms/cdn_dependencies/waypoints.html'%}
+    {% include 'rooms/cdn_dependencies/js-cookie.html'%}
+
+
+    <script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container')[0],
+            onAfterPageLoad: () => {
+                // init AJAX buttons every additional infinite-container items
+                initBorder()
+                initLikeButtons()
+            }
+        });
+
+        // $(document).ready(function() { $('body').bootstrapMaterialDesign(); });
+        $('body').bootstrapMaterialDesign();
+    </script>
+    
+    <!-- Custom App JS -->
+    <script src="{% static 'js/app.js' %}" defer></script>
+</body>
+</html>

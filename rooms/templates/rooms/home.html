@@ -1,0 +1,156 @@
+{% extends 'rooms/base.html' %}
+
+{% block html_title %} - Home{% endblock %}
+{% block meta_desc %}Online Class Environment is a place to store and share your files, lessons, and modules with your friends. Developed by  Shikha Lakra and Shreya Khan.{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<div id="welcome-banner" class="jumbotron jumbotron-fluid bg-white m-0 pt-5 pb-2">
+
+    <div class="container text-center">
+        <h3>Share your lessons at</h3>
+
+        <div class="pt-3">
+            <img src="{% static 'images/logo-color.svg'%}" class="logo" alt="RoomFiles Logo">
+
+            <h1 class="welcome-title">Online Class Environment</h1>
+        </div>
+
+        <p class="my-5">Share and store your learning modules, and be up-to-date with your classmates.</p>
+        
+        <a href="{% url 'register' %}" class="btn btn-info btn-raised text-capitalize btn-padded">Join Your Classmates</a>
+        <p class="small mt-2">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+
+    </div>
+
+    <div class="text-center">
+        <span class="material-icons text-muted rotate-90 py-3">double_arrow</span>
+    </div>
+
+</div>
+
+<div id="highlights">
+    <!-- Rooms -->
+    <div class="container-fluid w-100 p-5">
+        <div class="row wp-fade-up">
+            <div class="col-12 col-md-6 order-md-2">
+                <div class="container px-4 px-md-0">
+                    <img class="card w-100 br-2"
+                        srcset="
+                        {% static 'images/home/rooms-320.jpg' %} 320w,
+                        {% static 'images/home/rooms-731.jpg' %} 731w,
+                        {% static 'images/home/rooms-990.jpg' %} 990w,
+                        "
+                        sizes="(min-width: 768px) 30vw, 80vw"
+                        src="{% static 'images/home/rooms-990.jpg' %}"
+                    >
+                </div>
+            </div>
+            
+            <div class="col-12 col-md order-md-1 d-flex">
+                <div class="text-center text-md-left m-auto">
+                    <h2 class="py-4 m-0">Join in multiple rooms at once</h2>
+                    <p class="lead">
+                        Just like your class, you can have multiple rooms for different subjects/courses
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Files -->
+    <div class="container-fluid w-100 p-5">
+        <div class="row wp-fade-up">
+            <div class="col-12 col-md-4">
+                <div class="container px-4 px-md-0">
+                    <img class="card w-100 br-2"
+                        srcset="
+                        {% static 'images/home/files-320.jpg' %} 320w,
+                        {% static 'images/home/files-731.jpg' %} 731w,
+                        {% static 'images/home/files-990.jpg' %} 990w,
+                        "
+                        sizes="(min-width: 768px) 30vw, 80vw"
+                        src="{% static 'images/home/files-990.jpg' %}"
+                    >
+                </div>
+            </div>
+            
+            <div class="col-12 col-md d-flex">
+                <div class="text-center text-md-left m-auto">
+                    <h2 class="py-4 m-0">Upload your files in one place</h2>
+                    <p class="lead">
+                        Share and store your room/class files, ready to be downloaded
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Announcements -->
+    <div class="container-fluid w-100 p-5">
+        <div class="row wp-fade-up">
+            <div class="col-12 col-md-4 order-md-2">
+                <div class="container px-4 px-md-0">
+                    <img class="card w-100 br-2"
+                        srcset="
+                        {% static 'images/home/announcements-320.jpg' %} 320w,
+                        {% static 'images/home/announcements-731.jpg' %} 731w,
+                        {% static 'images/home/announcements-990.jpg' %} 990w,
+                        "
+                        sizes="(min-width: 768px) 30vw, 80vw"
+                        src="{% static 'images/home/announcements-990.jpg' %}"
+                    >
+                </div>
+            </div>
+            
+            <div class="col-12 col-md order-md-1 d-flex">
+                <div class="text-center text-md-left m-auto">
+                    <h2 class="py-4 m-0">Be updated with announcements</h2>
+                    <p class="lead">
+                        Inform your colleagues of what's happening, or give them reminders and updates
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="container-fluid w-100 p-5">
+        <div class="row wp-fade-up">
+            <div class="col-12 col-md-4">
+                <div class="container px-4 px-md-0">
+                    <img class="card w-100 br-2"
+                        srcset="
+                        {% static 'images/home/notifications-320.jpg' %} 320w,
+                        {% static 'images/home/notifications-731.jpg' %} 731w,
+                        {% static 'images/home/notifications-990.jpg' %} 990w,
+                        "
+                        sizes="(min-width: 768px) 30vw, 80vw"
+                        src="{% static 'images/home/notifications-990.jpg' %}"
+                    >
+                </div>
+            </div>
+            
+            <div class="col-12 col-md d-flex">
+                <div class="text-center text-md-left m-auto">
+                    <h2 class="py-4 m-0">Never miss out an activity</h2>
+                    <p class="lead">
+                        Receive notifications for every new file or announcement in your room
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'rooms/base.html' %}
+
+{% block html_title %} - Close Account{% endblock %}
+{% block meta_desc %}Close your RoomFiles account.{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="card-header">
+                <h3 class="text-danger">Close Account</h3>
+            </div>
+
+            <div class="container pt-3">
+                <p><strong>Are you sure you want to close your account?</strong></p>
+                
+                <p>This action cannot be undone, and you cannot log in with this account again.</p>
+            </div>
+
+            <form method="POST" class="pt-4">
+                {% csrf_token %}
+                <button id='closeAccount' name="close-account" type="submit" class="btn btn-block btn-raised btn-danger text-lowercase" disabled>
+                    I understand, close my account
+                    <span class="countdown text-lowercase" data-duration="10"></span>
+                </button>
+            </form>
+            
+        </div>
+    </div>
+    
+</div>
+{% endblock content %}

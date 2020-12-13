@@ -1,0 +1,42 @@
+{% extends 'rooms/base.html' %}
+
+{% block html_title %} - Create a Room{% endblock %}
+{% block meta_desc %}Create your own room now! Gather with your friends and collaborate with Online Class Environment.{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+
+    <div class="card mt-3">
+        <div class="card-body">
+
+            <form method="POST">
+                {% csrf_token %}
+                <legend>
+                    {% if room %}
+                        Update Room "{{ room.name }}"</legend>
+                    {% else %}
+                        Create Room
+                    {% endif %}
+                </legend>
+                <fieldset class="form-group">
+                    {{ form | crispy }}
+                </fieldset>
+
+                <div class="form-group text-right">
+                    <button class="btn btn-primary" type="submit">
+                        {% if room %}
+                            Save
+                        {% else %}
+                            Create
+                        {% endif %}
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

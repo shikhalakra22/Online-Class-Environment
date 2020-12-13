@@ -1,0 +1,49 @@
+
+<div class="card mt-3 infinite-item
+{% if file.pk in unread_files %}card-unread{% endif %}">
+
+<div class="card-body">
+    <div class="row">
+        <div class="col">
+            {% with person=file.posted_by.profile %}
+            <div class="float-left">
+                {% include 'rooms/item_templates/avatar_thumbnail.html' %}
+            </div>
+            {% endwith%}
+
+            <div class="content-with-avatar pt-1">
+                <h6> <a href="{% url 'file' file.room.pk file.room.slug file.pk %}">{{ file.name }}</a></h6>
+                <p>By: {{ file.posted_by.profile.display_username }}</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-auto d-flex justify-content-between">
+
+            <small class="float-left my-auto px-sm-3">{{ file.posted_datetime|timesince }}</small>
+
+            <!-- File Options : Menu -->
+            <div class="d-block my-auto">
+                <div class="dropdown">
+                    <button class="btn btn-dark btn-sm" type="button" id="fileOptionsMenuButton" data-toggle="dropdown">
+                        <span class="material-icons">more_vert</span>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="fileOptionsMenuButton">
+                        <a href="{% url 'file' file.room.pk file.room.slug file.pk %}" class="dropdown-item text-primary">Download</a>
+                        {% if file.posted_by == user %}
+                        <a href="{% url 'file-edit' file.room.pk file.room.slug file.pk %}" class="dropdown-item">Edit</a>
+                        <a href="{% url 'file-delete' file.room.pk file.room.slug file.pk %}" class="dropdown-item text-danger">Delete</a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+            </div>
+
+            
+
+            
+        </div>
+    </div>
+</div>
+
+</div>
