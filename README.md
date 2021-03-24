@@ -3,7 +3,7 @@ Django based E-learning Web-application similar to google classroom.
 
 ## https://onlineclassenv.herokuapp.com/
 
-##Technologies Used and Dependencies
+## Technologies Used and Dependencies
 * Django Framework
 * Django Google Drive Storage
 * Django REST Framework (Handling AJAX requests)
